@@ -34,18 +34,15 @@ int main(int argc, char **argv)
 		char *str = argv[1];
 		int nbr = ft_atoi(str);
 		int i = 1;
-		if (nbr > 0)
+		while (i <= 9)
 		{
-			while (i <= 9)
-			{
-				putnbr(i);
-				write(1, " x ", 3);
-				putnbr(nbr);
-				write(1, " = ", 3);
-				putnbr(i * nbr);
-				write(1, "\n", 1);
-				i++;
-			}
+			putnbr(i);		
+			write(1, " x ", 3);
+			putnbr(nbr);
+			write(1, " = ", 3);
+			putnbr(i * nbr);
+			write(1, "\n", 1);
+			i++;
 		}
 	}
 	write(1, "\n", 1);
