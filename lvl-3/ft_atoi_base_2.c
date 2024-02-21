@@ -1,36 +1,34 @@
-#include <stdio.h>
-int ft_atoi_base(const char *str,int str_base)
-{
-    int i;
-    int result;
-    int sig;
-    sig = 1;
-    result = 0;
-    i = 0;
-    char *str1 = (char*)str;
+#include <unistd.h>
 
-    if(str1[i] == '-')
-        sig = -1;
-    if(str1[i] == '-' || str1[i] == '+')
+int	ft_atoi_base(const char *str, int str_base)
+{
+    int sign = 1;
+    int i = 0;
+    int result;
+    char *s1 = (char *)str;
+    if (s1[i] == '-')
+        sign = -1;
+    if (s1[i] == '+' || s1[i] == '-')
         i++;
-    while((str1[i] != '\0' && ((str1[i] <= '9' && str1[i] >= '0') || (str1[i] >= 'a' && str1[i] <= 'f') || (str1[i] <= 'F' && str1[i] >= 'A'))))
+    while (s1[i] && (s1[i] >= '0' && s1[i] <= '9') || (s1[i] >= 'a' && s1[i] <= 'f') || (s1[i] >= 'A' && s1[i] <= 'F'))
     {
-        if(str1[i] <= '9' && str1[i] >= '0' && (str1[i] - '0') >= str_base)
+        if (s1[i] >= '0' && s1[i] <= '9' && (s1[i] - '0') >= str_base)
             break;
-        if((str1[i] >= 'a' && str1[i] <= 'f' && (str1[i] - 'a' + 10) >= str_base))
+        if (s1[i] >= 'a' && s1[i] <= 'f' && (s1[i] - 'a' + 10) >= str_base)
             break;
-        if(str1[i] <= '9' && str1[i] >= '0' && (str1[i] - '0') < str_base)
+        if (s1[i] >= '0' && s1[i] <= '9' && (s1[i] - '0') < str_base)
         {
-            result = result * str_base + str1[i] - '0';
+            result = result * str_base + s1[i] - '0';
             i++;
         }
-        if(str1[i] <= 'F' && str1[i] >= 'A')
-            str1[i] = str1[i] + 32;
-        if(str1[i] >= 'a' && str1[i] <= 'f' && (str1[i] - 'a' + 10) < str_base)
+        if (s1[i] >= 'A' && s1[i] <= 'F')
+            s1[i] = s1[i] + 32;
+        if (s1[i] >= 'a' && s1[i] <= 'f' && (s1[i] - 'a' + 10) < str_base)
         {
-            result = result * str_base + str1[i] - 'a' + 10;
+            result = result * str_base + s1[i] - 'a' + 10;
             i++;
         }
     }
-    return(sig * result);
+    result *= sign;
+    return (result);
 }
